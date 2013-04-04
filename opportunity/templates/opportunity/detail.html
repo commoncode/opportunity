@@ -1,0 +1,9 @@
+{{ object }}
+
+{% if object.skills.exists %}
+	<ul>
+		{% for skill in object.skills.all %}
+			<li>{{ skill }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}
