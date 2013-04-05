@@ -1,3 +1,4 @@
+
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -10,39 +11,38 @@ class Client(models.Model):
         ordering = ('name', )
 
     def get_absolute_url(self):
-        return reverse('client_detail', args=(self.pk, ))
+        return reverse('client-detail', args=(self.pk, ))
 
     def __unicode__(self):
-        return (u'%s' % self.name)
+        return unicode(self.name)
 
 
 class Opportunity(models.Model):
-    client = models.ForeignKey('opportunity.Client', related_name='opportunities')
-    skills = models.ManyToManyField('opportunity.Skill', related_name='opportunities')
+    client = models.ForeignKey('Client', related_name='opportunities')
+    skills = models.ManyToManyField('Skill', related_name='opportunities')
 
     class Meta:
-        ordering = ('pk', )
         verbose_name_plural = 'opportunities'
 
     def get_absolute_url(self):
-        return reverse('opportunity_detail', args=(self.pk, ))
+        return reverse('opportunity-detail', args=(self.pk, ))
 
     def __unicode__(self):
-        return (u'%s' % self.client.name)
+        return unicode(self.client.name)
 
 
 class Resource(models.Model):
     name = models.CharField(max_length=240)
-    skills = models.ManyToManyField('opportunity.Skill', related_name='developers')
+    skills = models.ManyToManyField('Skill', related_name='developers')
 
     class Meta:
         ordering = ('name', )
 
     def get_absolute_url(self):
-        return reverse('resource_detail', args=(self.pk, ))
+        return reverse('resource-detail', args=(self.pk, ))
 
     def __unicode__(self):
-        return (u'%s' % self.name)
+        return unicode(self.name)
 
 
 class Skill(models.Model):
@@ -52,4 +52,4 @@ class Skill(models.Model):
         ordering = ('name', )
 
     def __unicode__(self):
-        return (u'%s' % self.name)
+        return unicode(self.name)

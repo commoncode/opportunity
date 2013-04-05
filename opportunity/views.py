@@ -1,3 +1,4 @@
+
 from django.views.generic import DetailView, ListView
 
 from .models import Client, Opportunity, Resource
@@ -35,25 +36,11 @@ class ResourceDetail(DetailView):
 
 
 # CBV Wrappers
-def client_list(request):
-    return ClientList.as_view()(request)
+client_list = ClientList.as_view()
+client_detail = ClientDetail.as_view()
 
+opportunity_list = OpportunityList.as_view()
+opportunity_detail = OpportunityDetail.as_view()
 
-def client_detail(request, pk):
-    return ClientDetail.as_view()(request, pk=pk)
-
-
-def opportunity_list(request):
-    return OpportunityList.as_view()(request)
-
-
-def opportunity_detail(request, pk):
-    return OpportunityDetail.as_view()(request, pk=pk)
-
-
-def resource_list(request):
-    return ResourceList.as_view()(request)
-
-
-def resource_detail(request, pk):
-    return ResourceDetail.as_view()(request, pk=pk)
+resource_list = ResourceList.as_view()
+resource_detail = ResourceDetail.as_view()
